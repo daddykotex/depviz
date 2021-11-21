@@ -24,6 +24,7 @@ lazy val frontEnd = (project in file("front-end"))
     Compile / fullLinkJS / scalaJSLinkerOutputDirectory := {
       scalaJsAssets.value / "full-opt"
     },
+    // TODO: why is scalaJSLinkerOutputDirectory path unused?
     Compile / fastOptJS / artifactPath := {
       scalaJsAssets.value / "fast-opt" / "main.js"
     }
