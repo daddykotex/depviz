@@ -34,12 +34,6 @@ lazy val backEnd = (project in file("back-end"))
   .settings(
     name := "depviz-back-end",
     reStart / mainClass := Some("depviz.Main"),
-    scalacOptions ~= (_.filterNot(
-      Set(
-        "-Ywarn-unused:imports",
-        "-Xfatal-warnings"
-      )
-    )),
     Compile / unmanagedResourceDirectories += (frontEnd / scalaJsTopDir).value,
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-ember-server" % V.http4s,

@@ -11,7 +11,10 @@ import org.http4s.server.middleware.Logger
 
 object Server {
 
-  def stream[F[_]: Async]: Stream[F, Unit] = {
+  def stream[F[_]: Async]: Stream[F, Any] = {
+    // asIntanceOf to stop the dead code warning.
+    def hacked = Resource.eval(Async[F].never).asInstanceOf[Resource[F, Any]]
+
     for {
       client <- Stream.resource(EmberClientBuilder.default[F].build)
       _ = locally(client)
@@ -25,15 +28,14 @@ object Server {
       // With Middlewares in place
       finalHttpApp = Logger.httpApp(true, true)(httpApp)
 
-      _ <- Stream.resource(
+      exitCode <- Stream.resource(
         EmberServerBuilder
           .default[F]
           .withHost(ipv4"0.0.0.0")
           .withPort(port"8080")
           .withHttpApp(finalHttpApp)
-          .build >>
-          Resource.eval(Async[F].never)
+          .build >> hacked
       )
-    } yield ()
+    } yield exitCode
   }.drain
 }
