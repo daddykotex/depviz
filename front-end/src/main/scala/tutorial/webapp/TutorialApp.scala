@@ -12,7 +12,6 @@ object TutorialApp {
   }
 
   def main(args: Array[String]): Unit = {
-    println(document)
     appendPar(document.body, "Hello World")
   }
 }

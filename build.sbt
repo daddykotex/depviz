@@ -19,7 +19,7 @@ lazy val frontEnd = (project in file("front-end"))
   .settings(
     name := "depviz-front-end",
     scalaJSUseMainModuleInitializer := true,
-    scalaJsTopDir := target.value / "top",
+    scalaJsTopDir := baseDirectory.value / "src" / "top",
     scalaJsAssets := scalaJsTopDir.value / "assets" / "js",
     Compile / fullLinkJS / scalaJSLinkerOutputDirectory := {
       scalaJsAssets.value / "full-opt"
@@ -33,12 +33,21 @@ lazy val frontEnd = (project in file("front-end"))
     )
   )
 
+lazy val buildInfoSettings = Def.settings(
+  buildInfoKeys := Seq[BuildInfoKey](
+    name,
+    version,
+    scalaVersion,
+    sbtVersion,
+    "assetsPath" -> Some((frontEnd / scalaJsTopDir).value)
+  ),
+  buildInfoPackage := "depviz"
+)
 lazy val backEnd = (project in file("back-end"))
   .enablePlugins(BuildInfoPlugin)
   .settings(
     name := "depviz-back-end",
     reStart / mainClass := Some("depviz.Main"),
-    Compile / unmanagedResourceDirectories += (frontEnd / scalaJsTopDir).value,
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-ember-server" % V.http4s,
       "org.http4s" %% "http4s-ember-client" % V.http4s,
@@ -51,3 +60,4 @@ lazy val backEnd = (project in file("back-end"))
       "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect % Test
     )
   )
+  .settings(buildInfoSettings)
