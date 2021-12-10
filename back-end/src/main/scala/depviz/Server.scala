@@ -26,7 +26,7 @@ object Server {
       ).orNotFound
 
       // With Middlewares in place
-      finalHttpApp = Logger.httpApp(true, true)(httpApp)
+      finalHttpApp = Logger.httpApp(true, false)(httpApp)
 
       exitCode <- Stream.resource(
         EmberServerBuilder

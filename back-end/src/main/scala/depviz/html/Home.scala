@@ -4,18 +4,23 @@ import scalatags.Text.all._
 import scalatags.Text
 
 object Home {
+
   val content: Text.TypedTag[String] = html(
     head(
-      script(
-        src := "/assets/js/fast-opt/main.js"
-      ) // use buildinfo to compute this path
+      script(src := "/assets/js/dummy-tree.js"),
+      script(src := "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"),
+      script(src := "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"),
+      link(
+        rel := "stylesheet",
+        href := "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"
+      )
     ),
     body(
-      h1("This is my title"),
       div(
-        p("This is my first paragraph"),
-        p("This is my second paragraph")
-      )
+        p("Search: ", input(`type` := "search", id := "inputFile"))
+      ),
+      div(id := "tree_div", `class` := "jstree-no-icons"),
+      script(src := "/assets/js/fast-opt/main.js") // use buildinfo to compute this path
     )
   )
 }
