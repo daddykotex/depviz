@@ -16,10 +16,6 @@ object Home {
       )
     ),
     body(
-      div(
-        p("Search: ", input(`type` := "search", id := "inputFile"))
-      ),
-      div(id := "tree_div", `class` := "jstree-no-icons"),
       script(src := "/assets/js/fast-opt/main.js") // use buildinfo to compute this path
     )
   )
