@@ -1,8 +1,10 @@
 package depviz
 
-import cats.effect.{Async, Resource}
+import cats.effect.Async
+import cats.effect.Resource
 import cats.syntax.all._
 import com.comcast.ip4s._
+import depviz.routes.Routes
 import fs2.Stream
 import org.http4s.ember.client.EmberClientBuilder
 import org.http4s.ember.server.EmberServerBuilder
@@ -18,10 +20,10 @@ object Server {
     for {
       client <- Stream.resource(EmberClientBuilder.default[F].build)
       _ = locally(client)
-      helloWorldAlg = HelloWorld.impl[F]
 
       httpApp = (
         Routes.htmlRoutes[F] <+>
+          Routes.apiRoutes[F] <+>
           Routes.assetsRoutes[F]
       ).orNotFound
 

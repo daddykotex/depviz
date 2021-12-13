@@ -1,7 +1,7 @@
 package depviz.html
 
-import scalatags.Text.all._
 import scalatags.Text
+import scalatags.Text.all._
 
 object NotFound {
   val content = html(

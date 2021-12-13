@@ -3,7 +3,7 @@ lazy val root = (project in file("."))
     inThisBuild(
       List(
         organization := "ch.epfl.scala",
-        scalaVersion := "2.13.6",
+        scalaVersion := "2.13.4",
         scalafixDependencies += "com.github.liancheng" %% "organize-imports" % "0.6.0"
       )
     ),
@@ -49,6 +49,8 @@ lazy val backEnd = (project in file("back-end"))
   .settings(
     name := "depviz-back-end",
     reStart / mainClass := Some("depviz.Main"),
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full),
+    addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-ember-server" % V.http4s,
       "org.http4s" %% "http4s-ember-client" % V.http4s,

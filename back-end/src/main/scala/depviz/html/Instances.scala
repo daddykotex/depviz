@@ -1,10 +1,10 @@
 package depviz.html
 
-import org.http4s.EntityEncoder
-import org.http4s.headers.`Content-Type`
-import org.http4s.MediaType
-import scalatags.Text
 import org.http4s.Charset
+import org.http4s.EntityEncoder
+import org.http4s.MediaType
+import org.http4s.headers.`Content-Type`
+import scalatags.Text
 
 object instances {
   implicit def htmlEntityEncoder[F[_]]: EntityEncoder[F, Text.TypedTag[String]] =
