@@ -29,8 +29,7 @@ lazy val frontEnd = (project in file("front-end"))
       scalaJsAssets.value / "fast-opt" / "main.js"
     },
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "1.1.0",
-      "be.doeraene" %%% "scalajs-jquery" % "1.0.0"
+      "org.scala-js" %%% "scalajs-dom" % "1.1.0"
     )
   )
 
