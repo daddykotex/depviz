@@ -57,6 +57,7 @@ lazy val backEnd = (project in file("back-end"))
       "org.http4s" %% "http4s-dsl" % V.http4s,
       "com.lihaoyi" %% "scalatags" % V.scalaTags,
       "ch.qos.logback" % "logback-classic" % V.logback,
+      "io.get-coursier" %% "coursier" % V.coursier,
       //
       "org.scalameta" %% "munit" % V.munit % Test,
       "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect % Test

@@ -43,4 +43,12 @@ object Routes {
         .getOrElseF(NotFound(dhtml.NotFound.content))
     }
   }
+
+  def under[F[_]: Monad](routes: HttpRoutes[F])(path: String): HttpRoutes[F] = {
+    val dsl = new Http4sDsl[F] {}
+    import dsl._
+    HttpRoutes.of[F] { case req @ _ -> Root / path =>
+      routes.run(req)
+    }
+  }
 }
